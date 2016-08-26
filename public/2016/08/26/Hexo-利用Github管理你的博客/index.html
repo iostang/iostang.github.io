@@ -1,1 +1,32 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Hexo 利用Github管理你的博客 · 唐先森的技术博客</title><meta name="description" content="Hexo 利用Github管理你的博客 - TonyTong"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="唐先森的技术博客"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/3247395330" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/iostang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">Hexo 利用Github管理你的博客</h1><div class="post-info">Aug 26, 2016</div><div class="post-content"></div></article></div></section><footer><div class="paginator"><a href="/2016/08/25/新Mac-记一次修改shadowsocks过程/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2016 <a href="http://yoursite.com">TonyTong</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> Hexo 利用Github管理你的博客 · 唐先森的技术博客</title><meta name="description" content="Hexo 利用Github管理你的博客 - TonyTong"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="唐先森的技术博客"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/3247395330" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/iostang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">Hexo 利用Github管理你的博客</h1><div class="post-info">Aug 26, 2016</div><div class="post-content"><h3 id="1-搭建流程"><a href="#1-搭建流程" class="headerlink" title="1 搭建流程"></a>1 搭建流程</h3><ol>
+<li>在github上创建一个repo 起名必须规范 不用使用大写字母 像这样：<a href="https://iostang.github.io" target="_blank" rel="external">iostang.github.io</a></li>
+<li>创建两个分支 master · hexo</li>
+<li>设置hexo为默认分支</li>
+<li>使用git clone git@github.com:iostang/iostang.github.io.git 存放在自己想要管理博客的文件夹</li>
+<li><p>在该目录下 依次使用</p>
+<pre><code>sudo npm install -g hexo
+hexo init
+npm install 
+npm install hexo-deployer-git --save
+</code></pre></li>
+<li><p>修改_config.yml中的deploy参数</p>
+<pre><code>deploy:
+type: git
+repo: git@github.com:iostang/iostang.github.io.git
+branch: master
+</code></pre></li>
+<li><p>hexo g 生成网站文件</p>
+</li>
+<li><p>hexo s 这个时候就可以在本地查看博客了<a href="http://localhost:4000/" target="_blank" rel="external">http://localhost:4000</a></p>
+<p> 这个时候再点击<a href="http://localhost:4000，正常情况下应该是最原始的画面，但是我看到的是：" target="_blank" rel="external">http://localhost:4000，正常情况下应该是最原始的画面，但是我看到的是：</a><br> 白板和Cannot GET / 几个字</p>
+<p> 原因：由于2.6以后就更新了，我们需要手动配置些东西，我们需要输入下面三行命令：</p>
+<pre><code>npm install hexo-renderer-ejs --save
+npm install hexo-renderer-stylus --save
+npm install hexo-renderer-marked --save
+</code></pre><p> <strong>再次执行hexo g · hexo s</strong></p>
+</li>
+<li><p>依次执行 git add . git commit -m “balabala” git push origin hexo 提交相关文件到hexo分支</p>
+</li>
+<li>使用hexo g -d 生成网站并部署到github 注意提交到master分支上</li>
+</ol>
+<h3 id="2-日常维护"><a href="#2-日常维护" class="headerlink" title="2 日常维护"></a>2 日常维护</h3><h3 id="3-如何管理"><a href="#3-如何管理" class="headerlink" title="3 如何管理"></a>3 如何管理</h3></div></article></div></section><footer><div class="paginator"><a href="/2016/08/25/新Mac-记一次修改shadowsocks过程/" class="next">NEXT</a></div><div class="copyright"><p>© 2015 - 2016 <a href="http://yoursite.com">TonyTong</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
