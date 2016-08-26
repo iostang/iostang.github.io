@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-26T06:00:51.000Z</updated>
+  <updated>2016-08-26T08:06:27.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,25 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Hexo 利用Github管理你的博客</title>
+    <link href="http://yoursite.com/2016/08/26/Hexo-%E5%88%A9%E7%94%A8Github%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://yoursite.com/2016/08/26/Hexo-利用Github管理你的博客/</id>
+    <published>2016-08-26T08:06:27.000Z</published>
+    <updated>2016-08-26T08:06:27.000Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>新Mac 记一次修改shadowsocks过程</title>
     <link href="http://yoursite.com/2016/08/25/%E6%96%B0Mac-%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BF%AE%E6%94%B9shadowsocks%E8%BF%87%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/</id>
     <published>2016-08-25T10:29:55.000Z</published>
-    <updated>2016-08-26T06:00:51.000Z</updated>
+    <updated>2016-08-26T07:56:06.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p> <strong>记住 确认是否已经登录服务器了 以下操作基本都是基于登录状态</strong> </p>
