@@ -1,9 +1,16 @@
+
+---
+title: Hexo 利用Github管理博客
+date: 2016-08-26 18:49:55
+tags: Hexo
+---
+
 # Hexo 利用Github管理博客
 
 
 ### 1 搭建流程
 
-####配置环境
+>配置环境
 安装homebrew node.js git 
 申请Github
 算了这些就不写了。。。
