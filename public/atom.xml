@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-26T08:13:15.000Z</updated>
+  <updated>2016-08-26T10:43:35.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,13 +16,14 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hexo 利用Github管理你的博客</title>
+    <title></title>
     <link href="http://yoursite.com/2016/08/26/Hexo-%E5%88%A9%E7%94%A8Github%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
     <id>http://yoursite.com/2016/08/26/Hexo-利用Github管理你的博客/</id>
-    <published>2016-08-26T08:06:27.000Z</published>
-    <updated>2016-08-26T08:13:15.000Z</updated>
+    <published>2016-08-26T08:11:21.000Z</published>
+    <updated>2016-08-26T10:43:35.000Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="1-搭建流程"><a href="#1-搭建流程" class="headerlink" title="1 搭建流程"></a>1 搭建流程</h3><ol>
+    <content type="html"><![CDATA[<h1 id="Hexo-利用Github管理博客"><a href="#Hexo-利用Github管理博客" class="headerlink" title="Hexo 利用Github管理博客"></a>Hexo 利用Github管理博客</h1><h3 id="1-搭建流程"><a href="#1-搭建流程" class="headerlink" title="1 搭建流程"></a>1 搭建流程</h3><p>####配置环境<br>安装homebrew node.js git<br>申请Github<br>算了这些就不写了。。。</p>
+<ol>
 <li>在github上创建一个repo 起名必须规范 不用使用大写字母 像这样：<a href="https://iostang.github.io" target="_blank" rel="external">iostang.github.io</a></li>
 <li>创建两个分支 master · hexo</li>
 <li>设置hexo为默认分支</li>
@@ -53,17 +54,47 @@ npm install hexo-renderer-marked --save
 </li>
 <li>使用hexo g -d 生成网站并部署到github 注意提交到master分支上</li>
 </ol>
-<h3 id="2-日常维护"><a href="#2-日常维护" class="headerlink" title="2 日常维护"></a>2 日常维护</h3><h3 id="3-如何管理"><a href="#3-如何管理" class="headerlink" title="3 如何管理"></a>3 如何管理</h3>]]></content>
+<h3 id="2-日常维护"><a href="#2-日常维护" class="headerlink" title="2 日常维护"></a>2 日常维护</h3><p>如果想写新的博客或者修改博客 你可以按照这个流程</p>
+<pre><code>1. hexo n &quot;这是新博客的标题&quot;
+2. hexo g
+3. hexo s
+4. git add .
+5. git commit -m &quot;balabala&quot;
+6. git pull origin hexo 
+7. git push origin hexo
+8. hexo d
+</code></pre><p><strong>ok 这个时候新博客已经部署到Github仓库了</strong></p>
+<h3 id="3-如何管理"><a href="#3-如何管理" class="headerlink" title="3 如何管理"></a>3 如何管理</h3><p>那如果我有多台电脑 该如何管理你的博客呢？</p>
+<pre><code>1. git clone git@github.com:iostang/iostang.github.io.git
+2. sudo npm install -g hexo
+3. npm install hexo-renderer-ejs --save
+4. npm install hexo-renderer-stylus --save
+5. npm install hexo-renderer-marked --save
+6. npm install hexo-deployer-git --save
+</code></pre><p>千万不要执行<strong>hexo init</strong>这条指令 否则会覆盖_config.yml</p>
+<h3 id="4-博客主题"><a href="#4-博客主题" class="headerlink" title="4 博客主题"></a>4 博客主题</h3><ul>
+<li>有了博客 当然想要一个风格好看你的主题 你可以去<a href="https://hexo.io/themes/" target="_blank" rel="external">这里</a>下载你喜欢的主题</li>
+<li><p>也可以使用<a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank" rel="external">这个</a> 个人还蛮喜欢这种风格</p>
+<pre><code>npm install
+npm install --save hexo-renderer-jade hexo-generator-feed hexo-generator-sitemap hexo-browsersync hexo-generator-archive
+git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
+</code></pre></li>
+<li><p>修改 _config.yml 的 theme 配置项为 apollo:</p>
+<pre><code>theme: apollo
+</code></pre></li>
+</ul>
+<p>主题里面的内容就需要自己去配置了 比如微博账号</p>
+<ul>
+<li>安装主题有一个小问题就是 在你提交到Github的时候 你需要先把该主题目录下的.git文件删掉 不然提交不上去</li>
+</ul>
+]]></content>
     
     <summary type="html">
     
-      &lt;h3 id=&quot;1-搭建流程&quot;&gt;&lt;a href=&quot;#1-搭建流程&quot; class=&quot;headerlink&quot; title=&quot;1 搭建流程&quot;&gt;&lt;/a&gt;1 搭建流程&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;在github上创建一个repo 起名必须规范 不用使用大写字母 像这样：&lt;a href=&quot;ht
+      &lt;h1 id=&quot;Hexo-利用Github管理博客&quot;&gt;&lt;a href=&quot;#Hexo-利用Github管理博客&quot; class=&quot;headerlink&quot; title=&quot;Hexo 利用Github管理博客&quot;&gt;&lt;/a&gt;Hexo 利用Github管理博客&lt;/h1&gt;&lt;h3 id=&quot;1-搭建流
     
     </summary>
     
-    
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
     
   </entry>
   
@@ -72,7 +103,7 @@ npm install hexo-renderer-marked --save
     <link href="http://yoursite.com/2016/08/25/%E6%96%B0Mac-%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BF%AE%E6%94%B9shadowsocks%E8%BF%87%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/</id>
     <published>2016-08-25T10:29:55.000Z</published>
-    <updated>2016-08-26T07:56:06.000Z</updated>
+    <updated>2016-08-26T06:00:51.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p> <strong>记住 确认是否已经登录服务器了 以下操作基本都是基于登录状态</strong> </p>
