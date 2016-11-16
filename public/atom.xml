@@ -123,7 +123,7 @@
     <link href="http://yoursite.com/2016/08/26/Hexo-%E5%88%A9%E7%94%A8Github%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
     <id>http://yoursite.com/2016/08/26/Hexo-利用Github管理你的博客/</id>
     <published>2016-08-26T10:49:55.000Z</published>
-    <updated>2016-08-26T10:49:19.000Z</updated>
+    <updated>2016-11-16T15:18:01.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Hexo-利用Github管理博客"><a href="#Hexo-利用Github管理博客" class="headerlink" title="Hexo 利用Github管理博客"></a>Hexo 利用Github管理博客</h1><h3 id="1-搭建流程"><a href="#1-搭建流程" class="headerlink" title="1 搭建流程"></a>1 搭建流程</h3><blockquote>
 <p>配置环境<br>安装homebrew node.js git<br>申请Github<br>算了这些就不写了。。。</p>
