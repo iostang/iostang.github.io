@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-11-16T15:19:25.000Z</updated>
+  <updated>2016-11-16T15:44:05.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/09/26/%E9%85%8D%E7%BD%AEJenkins-for-iOS-%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%82%B9/"/>
     <id>http://yoursite.com/2016/09/26/配置Jenkins-for-iOS-记录一些问题点/</id>
     <published>2016-09-26T09:24:46.000Z</published>
-    <updated>2016-11-16T15:19:25.000Z</updated>
+    <updated>2016-11-16T15:44:05.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-源码管理"><a href="#1-源码管理" class="headerlink" title="1 源码管理"></a>1 源码管理</h2><ul>
 <li><p>Git源码管理问题    </p>
@@ -123,7 +123,7 @@
     <link href="http://yoursite.com/2016/08/26/Hexo-%E5%88%A9%E7%94%A8Github%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
     <id>http://yoursite.com/2016/08/26/Hexo-利用Github管理你的博客/</id>
     <published>2016-08-26T10:49:55.000Z</published>
-    <updated>2016-11-16T15:18:01.000Z</updated>
+    <updated>2016-11-16T15:44:05.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Hexo-利用Github管理博客"><a href="#Hexo-利用Github管理博客" class="headerlink" title="Hexo 利用Github管理博客"></a>Hexo 利用Github管理博客</h1><h3 id="1-搭建流程"><a href="#1-搭建流程" class="headerlink" title="1 搭建流程"></a>1 搭建流程</h3><blockquote>
 <p>配置环境<br>安装homebrew node.js git<br>申请Github<br>算了这些就不写了。。。</p>
@@ -210,7 +210,7 @@ git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
     <link href="http://yoursite.com/2016/08/25/%E6%96%B0Mac-%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BF%AE%E6%94%B9shadowsocks%E8%BF%87%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/</id>
     <published>2016-08-25T10:29:55.000Z</published>
-    <updated>2016-11-16T15:26:30.000Z</updated>
+    <updated>2016-11-16T15:44:05.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p> <strong>记住 确认是否已经登录服务器了 以下操作基本都是基于登录状态</strong> </p>
