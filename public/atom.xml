@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-26T09:32:46.000Z</updated>
+  <updated>2016-11-16T15:19:25.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2016/09/26/%E9%85%8D%E7%BD%AEJenkins-for-iOS-%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%82%B9/"/>
     <id>http://yoursite.com/2016/09/26/配置Jenkins-for-iOS-记录一些问题点/</id>
     <published>2016-09-26T09:24:46.000Z</published>
-    <updated>2016-09-26T09:32:46.000Z</updated>
+    <updated>2016-11-16T15:19:25.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-源码管理"><a href="#1-源码管理" class="headerlink" title="1 源码管理"></a>1 源码管理</h2><ul>
 <li><p>Git源码管理问题    </p>
@@ -31,17 +31,15 @@
 </code></pre></li>
 </ul>
 <p><img src="/images/sourceManager.png" alt=""></p>
-<p>##2 构建触发器</p>
-<ul>
+<h2 id="2-构建触发器"><a href="#2-构建触发器" class="headerlink" title="2 构建触发器"></a>2 构建触发器</h2><ul>
 <li><p>这一步比较简单 按固定格式填写就行</p>
 <pre><code>比如：
-Build periodically H 20 * * *
-Poll SCM H/5 * * * *
+ Build periodically H 20 * * *
+ Poll SCM H/5 * * * *
 </code></pre></li>
 </ul>
 <p><img src="/images/BuildTrigger.png" alt="">        </p>
-<p>##3 构建环境</p>
-<ul>
+<h2 id="3-构建环境"><a href="#3-构建环境" class="headerlink" title="3 构建环境"></a>3 构建环境</h2><ul>
 <li>这个需要配置证书和描述文件 以及输出路径  配置证书这部分就不细说了 网上很多资料</li>
 </ul>
 <p><img src="/images/BuildEnv.png" alt="">    </p>
@@ -63,49 +61,46 @@ Poll SCM H/5 * * * *
 <pre><code>${WORKSPACE}/YouXian/YouXian.xcodeproj
 </code></pre></li>
 </ul>
-<p><img src="/Users/tangchi/Desktop/Advanced Xcode build options.png" alt="&quot;Advanced Xcode build options&quot;"></p>
-<p>##5 构建后操作</p>
-<ul>
+<p><img src="/images/Advanced Xcode build options.png" alt=""></p>
+<h2 id="5-构建后操作"><a href="#5-构建后操作" class="headerlink" title="5 构建后操作"></a>5 构建后操作</h2><ul>
 <li>生成ipa之后可以利用fir或者pgyer上传 填好Token就行了</li>
 <li>要是有能力写脚本也行</li>
 </ul>
-<p>##6 The following build commands failed: Check dependencies</p>
-<ul>
+<h2 id="6-The-following-build-commands-failed-Check-dependencies"><a href="#6-The-following-build-commands-failed-Check-dependencies" class="headerlink" title="6 The following build commands failed: Check dependencies"></a>6 The following build commands failed: Check dependencies</h2><ul>
 <li><p>Jenkins 集成Xcode 项目的时候在证书上遇到了问题</p>
 <pre><code>Check dependencies
-Code Sign error: No codesigning identities found: No codesigning identities (i.e. certificate and private key pairs)         that     
-match the provisioning profile specified in your build settings (“qingyunDeveloper”) were found.
+ Code Sign error: No codesigning identities found: No codesigning identities (i.e. certificate and private key pairs)          that     
+ match the provisioning profile specified in your build settings (“qingyunDeveloper”) were found.
 </code></pre></li>
 <li><p>如果遇到类似的错误 解决办法：</p>
 <pre><code>1 打开keychain keys 找到apple 的开发者证书。然后复制。 
-2 选择左边的系统（system）把刚复制的证书放进去。
+ 2 选择左边的系统（system）把刚复制的证书放进去。
 </code></pre></li>
 <li><p>如果这个还没有解决 接下来第二步：</p>
 <pre><code>1 找到你用户下的Provisioning Profiles 文件。目录为 /Users/xxx/Library/MobileDevice/Provisioning Profiles  
-xxx表示你自己的用户名
-2 把这里面所有的证书复制到/Users/Shared/Jenkins/Library/MobileDevice/Provisioning Profile 这个文件夹下
+ xxx表示你自己的用户名
+ 2 把这里面所有的证书复制到/Users/Shared/Jenkins/Library/MobileDevice/Provisioning Profile 这个文件夹下
 </code></pre></li>
 </ul>
 <ul>
 <li><p>最后提示</p>
 <pre><code>iPhone.build/ProjectCos.xcent /Users/chenqing/Sqy/iOSProject/cyou/Svn/Cos/CosXCode_lxh/build/ProjectCos.app
 
-** BUILD SUCCEEDED **
+ ** BUILD SUCCEEDED **
 
-Finished: SUCCESS
+ Finished: SUCCESS
 </code></pre><p>  <a href="http://www.cnblogs.com/qingjoin/p/3929493.html" target="_blank" rel="external">链接： Jenkins Xcode 证书设置错误 Code Sign error: No matching codesigning identity found: No codesigning identities
 </a></p>
 </li>
 </ul>
-<p>##7 注意点</p>
-<ul>
+<h2 id="7-注意点"><a href="#7-注意点" class="headerlink" title="7 注意点"></a>7 注意点</h2><ul>
 <li><p>关于证书问题还有一个注意点 </p>
 <pre><code>如果你是一个测试项目 
-在本地配置好证书和描述文件后一定要上传到github或者服务器上 
-然后在进行构建 否则肯定会构建失败的  
-因为jenkins是拉取你远端代码仓库的最新代码 
-如果只在本地配置不上传 必然构建失败 
-这也是一个比较基础的问题 
+ 在本地配置好证书和描述文件后一定要上传到github或者服务器上 
+ 然后在进行构建 否则肯定会构建失败的  
+ 因为jenkins是拉取你远端代码仓库的最新代码 
+ 如果只在本地配置不上传 必然构建失败 
+ 这也是一个比较基础的问题 
 </code></pre></li>
 </ul>
 ]]></content>
@@ -215,7 +210,7 @@ git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
     <link href="http://yoursite.com/2016/08/25/%E6%96%B0Mac-%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BF%AE%E6%94%B9shadowsocks%E8%BF%87%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/</id>
     <published>2016-08-25T10:29:55.000Z</published>
-    <updated>2016-08-26T06:00:51.000Z</updated>
+    <updated>2016-11-16T15:26:30.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p> <strong>记住 确认是否已经登录服务器了 以下操作基本都是基于登录状态</strong> </p>
@@ -307,6 +302,9 @@ git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
 <pre><code>使用ssh登录服务器报错 这个错误是公钥没有添加在authorized_keys中 
 
  加进去就行
+</code></pre><h3 id="7-如果以上都成功了-还不能翻墙"><a href="#7-如果以上都成功了-还不能翻墙" class="headerlink" title="7 如果以上都成功了 还不能翻墙"></a>7 如果以上都成功了 还不能翻墙</h3><pre><code>请先检查一下自己是否开启了shadowsocks翻墙了 如果有关掉 然后重试
+ 玩的开心
+ WTF GFW
 </code></pre>]]></content>
     
     <summary type="html">

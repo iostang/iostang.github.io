@@ -124,3 +124,8 @@ tags: shadowsocks
 	
      加进去就行
 
+### 7 如果以上都成功了 还不能翻墙 
+    请先检查一下自己是否开启了shadowsocks翻墙了 如果有关掉 然后重试
+     玩的开心
+     WTF GFW
+
