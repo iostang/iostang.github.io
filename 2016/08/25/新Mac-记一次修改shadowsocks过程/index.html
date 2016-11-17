@@ -1,0 +1,112 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title> 新Mac 记一次修改shadowsocks过程 · 唐先森的技术博客</title><meta name="description" content="新Mac 记一次修改shadowsocks过程 - TonyTong"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="short icon" href="/favicon.png"><link rel="stylesheet" href="/css/apollo.css"><link rel="search" type="application/opensearchdescription+xml" href="http://yoursite.com/atom.xml" title="唐先森的技术博客"></head><body><div class="wrap"><header><a href="/" class="logo-link"><img src="/favicon.png"></a><ul class="nav nav-list"><li class="nav-list-item"><a href="/" target="_self" class="nav-list-link">BLOG</a></li><li class="nav-list-item"><a href="/archives/" target="_self" class="nav-list-link">ARCHIVE</a></li><li class="nav-list-item"><a href="http://weibo.com/3247395330" target="_blank" class="nav-list-link">WEIBO</a></li><li class="nav-list-item"><a href="https://github.com/iostang" target="_blank" class="nav-list-link">GITHUB</a></li><li class="nav-list-item"><a href="/atom.xml" target="_self" class="nav-list-link">RSS</a></li></ul></header><section class="container"><div class="post"><article class="post-block"><h1 class="post-title">新Mac 记一次修改shadowsocks过程</h1><div class="post-info">Aug 25, 2016</div><div class="post-content"><blockquote>
+<p> <strong>记住 确认是否已经登录服务器了 以下操作基本都是基于登录状态</strong> </p>
+</blockquote>
+<h3 id="1-使用ssh生成秘钥"><a href="#1-使用ssh生成秘钥" class="headerlink" title="1.使用ssh生成秘钥"></a>1.使用ssh生成秘钥</h3><pre><code>ssh-keygen -t rsa -C &quot;your_email@example.com&quot;
+</code></pre><ul>
+<li>然后会提示输入密钥的名字 比如输入 oktang</li>
+<li>注意要避免重复命名</li>
+<li>还要求输入私钥密码 password</li>
+</ul>
+<h3 id="2-配置本地ssh登录-需要修改config文件-添加服务器-用户名和端口信息"><a href="#2-配置本地ssh登录-需要修改config文件-添加服务器-用户名和端口信息" class="headerlink" title="2.配置本地ssh登录 需要修改config文件 添加服务器 用户名和端口信息"></a>2.配置本地ssh登录 需要修改config文件 添加服务器 用户名和端口信息</h3><pre><code>Host vultr
+     HostName 0.0.0.0 //自己的服务器地址
+     User user  //服务器用户名
+     Port 1080  //连接服务器的端口
+     IdentityFile ~/.ssh/oktang //私钥路径
+</code></pre><h3 id="3-将这个公钥oktang-pub添加到服务器上的authorization-keys中"><a href="#3-将这个公钥oktang-pub添加到服务器上的authorization-keys中" class="headerlink" title="3.将这个公钥oktang.pub添加到服务器上的authorization.keys中"></a>3.将这个公钥<em>oktang.pub</em>添加到服务器上的authorization.keys中</h3><ul>
+<li>authorization.keys这个文件如果没有就新生成一个</li>
+<li><p>使用ssh登录到服务器</p>
+<pre><code>ssh oktang
+ cd ~/.ssh
+ vi authorized_keys
+</code></pre></li>
+<li><p>将之前生成的公钥内容拷贝到authorized_keys中</p>
+</li>
+<li>ok</li>
+</ul>
+<h3 id="4-如果需要修改端口-使用ssh登录服务器"><a href="#4-如果需要修改端口-使用ssh登录服务器" class="headerlink" title="4.如果需要修改端口 使用ssh登录服务器"></a>4.如果需要修改端口 使用ssh登录服务器</h3><p>修改shadow socks中的端口 或者密码什么的</p>
+<pre><code>vi /etc/shadowsocks.json
+
+ {
+     &quot;server&quot;:&quot;0.0.0.0”, //这里不用绑定你的服务器
+     &quot;server_port”:port, //这个是shadow socks端口 到时候客户端需要用的
+     &quot;local_address&quot;: &quot;127.0.0.1&quot;,
+     &quot;local_port&quot;:1080,
+     &quot;password”:&quot;password”,//shadowsocks密码
+     &quot;timeout&quot;:300,
+     &quot;method&quot;:&quot;aes-256-cfb&quot;,
+     &quot;fast_open&quot;: false
+ }
+</code></pre><ul>
+<li><p>修改“server_port”:12345 即可</p>
+</li>
+<li><p>修改登录端口</p>
+<pre><code>cd /etc/ssh
+
+ vi sshd_config 
+</code></pre></li>
+<li><p>修改sshd_config中的Port端口 这个端口需要和ssh登录的端口一致 如果不一致ssh将会登录不了</p>
+</li>
+</ul>
+<h3 id="5-配置完成后-可以添加shadowsocks环境"><a href="#5-配置完成后-可以添加shadowsocks环境" class="headerlink" title="5.配置完成后 可以添加shadowsocks环境"></a>5.配置完成后 可以添加shadowsocks环境</h3><h4 id="在已经登录服务器的情况下-执行"><a href="#在已经登录服务器的情况下-执行" class="headerlink" title=" 在已经登录服务器的情况下 执行 "></a><strong> 在已经登录服务器的情况下 执行 </strong></h4><pre><code>sudo pip install shadowsocks
+</code></pre><p><strong> 在没有/etc/shadowsocks.json配置文件的情况下  </strong></p>
+<pre><code>ssserver -h //查看所有参数
+
+ ssserver -p 443 -k password -m aes-256-cfb //前台运行，443为服务器端口，password为密码，修改这两项即可
+
+ sudo ssserver -p 443 -k password -m aes-256-cfb --user nobody -d start //后台运行方法，修改同上
+
+ sudo ssserver -d stop //停止运行
+
+ sudo less /var/log/shadowsocks.log //检查日志
+</code></pre><p><strong> vi /etc/shadowsocks.json </strong></p>
+<pre><code>{
+    &quot;server&quot;:&quot;my_server_ip&quot;,
+    &quot;server_port&quot;:8388,
+    &quot;local_address&quot;: &quot;127.0.0.1&quot;,
+    &quot;local_port&quot;:1080,
+    &quot;password&quot;:&quot;mypassword&quot;,
+    &quot;timeout&quot;:300,
+    &quot;method&quot;:&quot;aes-256-cfb&quot;,
+    &quot;fast_open&quot;: false
+}
+
+    ssserver -c /etc/shadowsocks.json //前台运行
+
+    ssserver -c /etc/shadowsocks.json -d start //后台运行
+
+    ssserver -c /etc/shadowsocks.json -d stop //停止
+</code></pre><h3 id="6-几项检查命令-和一些error"><a href="#6-几项检查命令-和一些error" class="headerlink" title="6 几项检查命令 和一些error"></a>6 几项检查命令 和一些error</h3><pre><code>netstat -antpl|grep -i listen //查看服务器运行状态
+
+ chmod 600 ~/.ssh/authorized_keys //记住要设置文件为可读可写rw
+
+ ll ~/.ssh //查看文件的权限
+</code></pre><p> <strong>[Error 98] Address already in use</strong></p>
+<pre><code>这个error应该是端口被占用了 修改shadowsocks.json中的端口
+
+ 切记shadowsocks.json中的端口不要和ssh登录端口一样 这是不一样的
+</code></pre><p><strong>Permission denied(publishkey,gssapi-keyex,gssapi-with-mic)</strong></p>
+<pre><code>使用ssh登录服务器报错 这个错误是公钥没有添加在authorized_keys中 
+
+ 加进去就行
+</code></pre><h3 id="7-如果以上都成功了-还不能翻墙"><a href="#7-如果以上都成功了-还不能翻墙" class="headerlink" title="7 如果以上都成功了 还不能翻墙"></a>7 如果以上都成功了 还不能翻墙</h3><pre><code>请先检查一下自己是否开启了shadowsocks翻墙了 如果有关掉 然后重试
+ 玩的开心
+ WTF GFW
+</code></pre></div></article></div></section><footer><div class="paginator"><a href="/2016/08/26/Hexo-利用Github管理你的博客/" class="prev">上一篇</a></div><div data-thread-key="2016/08/25/新Mac-记一次修改shadowsocks过程/" data-title="新Mac 记一次修改shadowsocks过程" data-url="http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"iostang"};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+     || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+
+</script><div id="disqus_thread"></div><script>var disqus_shortname = 'iostang';
+var disqus_identifier = '2016/08/25/新Mac-记一次修改shadowsocks过程/';
+var disqus_title = '新Mac 记一次修改shadowsocks过程';
+var disqus_url = 'http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/';
+(function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();</script><script id="dsq-count-scr" src="//iostang.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2016 <a href="http://yoursite.com">TonyTong</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
