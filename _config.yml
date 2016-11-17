@@ -70,4 +70,4 @@ theme: apollo
 deploy:
   type: git
   repo: git@github.com:iostang/iostang.github.io.git
-  branch: iostang
+  branch: master
