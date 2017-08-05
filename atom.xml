@@ -210,7 +210,7 @@ git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
     <link href="http://yoursite.com/2016/08/25/%E6%96%B0Mac-%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BF%AE%E6%94%B9shadowsocks%E8%BF%87%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/</id>
     <published>2016-08-25T10:29:55.000Z</published>
-    <updated>2016-11-17T06:04:29.000Z</updated>
+    <updated>2017-08-05T14:31:03.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p> <strong>记住 确认是否已经登录服务器了 以下操作基本都是基于登录状态</strong> </p>
@@ -240,12 +240,28 @@ git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
 <h3 id="4-如果需要修改端口-使用ssh登录服务器"><a href="#4-如果需要修改端口-使用ssh登录服务器" class="headerlink" title="4.如果需要修改端口 使用ssh登录服务器"></a>4.如果需要修改端口 使用ssh登录服务器</h3><p>修改shadow socks中的端口 或者密码什么的</p>
 <pre><code>vi /etc/shadowsocks.json
 
+单一账号配置
  {
      &quot;server&quot;:&quot;0.0.0.0”, //这里不用绑定你的服务器
      &quot;server_port”:port, //这个是shadow socks端口 到时候客户端需要用的
      &quot;local_address&quot;: &quot;127.0.0.1&quot;,
      &quot;local_port&quot;:1080,
      &quot;password”:&quot;password”,//shadowsocks密码
+     &quot;timeout&quot;:300,
+     &quot;method&quot;:&quot;aes-256-cfb&quot;,
+     &quot;fast_open&quot;: false
+ }
+
+ 多账号配置
+ {
+     &quot;server&quot;:&quot;0.0.0.0&quot;, //这里不用绑定你的服务器
+     &quot;local_address&quot;: &quot;127.0.0.1&quot;,
+     &quot;local_port&quot;:1080,
+     &quot;port_password&quot;:{
+        &quot;port1&quot;:&quot;password1&quot;,
+        &quot;port2&quot;:&quot;password2&quot;,
+        &quot;port3&quot;:&quot;password3&quot;
+     },
      &quot;timeout&quot;:300,
      &quot;method&quot;:&quot;aes-256-cfb&quot;,
      &quot;fast_open&quot;: false
