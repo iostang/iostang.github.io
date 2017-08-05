@@ -26,12 +26,28 @@
 <h3 id="4-如果需要修改端口-使用ssh登录服务器"><a href="#4-如果需要修改端口-使用ssh登录服务器" class="headerlink" title="4.如果需要修改端口 使用ssh登录服务器"></a>4.如果需要修改端口 使用ssh登录服务器</h3><p>修改shadow socks中的端口 或者密码什么的</p>
 <pre><code>vi /etc/shadowsocks.json
 
+单一账号配置
  {
      &quot;server&quot;:&quot;0.0.0.0”, //这里不用绑定你的服务器
      &quot;server_port”:port, //这个是shadow socks端口 到时候客户端需要用的
      &quot;local_address&quot;: &quot;127.0.0.1&quot;,
      &quot;local_port&quot;:1080,
      &quot;password”:&quot;password”,//shadowsocks密码
+     &quot;timeout&quot;:300,
+     &quot;method&quot;:&quot;aes-256-cfb&quot;,
+     &quot;fast_open&quot;: false
+ }
+
+ 多账号配置
+ {
+     &quot;server&quot;:&quot;0.0.0.0&quot;, //这里不用绑定你的服务器
+     &quot;local_address&quot;: &quot;127.0.0.1&quot;,
+     &quot;local_port&quot;:1080,
+     &quot;port_password&quot;:{
+        &quot;port1&quot;:&quot;password1&quot;,
+        &quot;port2&quot;:&quot;password2&quot;,
+        &quot;port3&quot;:&quot;password3&quot;
+     },
      &quot;timeout&quot;:300,
      &quot;method&quot;:&quot;aes-256-cfb&quot;,
      &quot;fast_open&quot;: false
@@ -91,7 +107,7 @@
 </code></pre><h3 id="7-如果以上都成功了-还不能翻墙"><a href="#7-如果以上都成功了-还不能翻墙" class="headerlink" title="7 如果以上都成功了 还不能翻墙"></a>7 如果以上都成功了 还不能翻墙</h3><pre><code>请先检查一下自己是否开启了shadowsocks翻墙了 如果有关掉 然后重试
  玩的开心
  WTF GFW
-</code></pre></div></article></div></section><footer><div class="paginator"><a href="/2016/08/26/Hexo-利用Github管理你的博客/" class="prev">PREV</a></div><div data-thread-key="2016/08/25/新Mac-记一次修改shadowsocks过程/" data-title="新Mac 记一次修改shadowsocks过程" data-url="http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"iostang"};
+</code></pre></div></article></div></section><footer><div class="paginator"><a href="/2016/08/26/Hexo-利用Github管理你的博客/" class="prev">上一篇</a></div><div data-thread-key="2016/08/25/新Mac-记一次修改shadowsocks过程/" data-title="新Mac 记一次修改shadowsocks过程" data-url="http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/" data-author-key="1" class="ds-thread"></div><script>var duoshuoQuery = {short_name:"iostang"};
 (function() {
     var ds = document.createElement('script');
     ds.type = 'text/javascript';ds.async = true;
@@ -109,4 +125,4 @@ var disqus_url = 'http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsoc
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-})();</script><script id="dsq-count-scr" src="//iostang.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2016 <a href="http://yoursite.com">TonyTong</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>
+})();</script><script id="dsq-count-scr" src="//iostang.disqus.com/count.js" async></script><div class="copyright"><p>© 2015 - 2017 <a href="http://yoursite.com">TonyTong</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/pinggod/hexo-theme-apollo" target="_blank">hexo-theme-apollo</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.6.1/MathJax.js?config=TeX-MML-AM_CHTML"></script><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;e=o.createElement(i);r=o.getElementsByTagName(i)[0];e.src='//www.google-analytics.com/analytics.js';r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));ga('create',"UA-65933410-1",'auto');ga('send','pageview');</script></body></html>

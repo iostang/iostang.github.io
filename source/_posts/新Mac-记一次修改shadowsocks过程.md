@@ -41,6 +41,7 @@ tags: shadowsocks
 
     vi /etc/shadowsocks.json
     
+    单一账号配置
      {
          "server":"0.0.0.0”, //这里不用绑定你的服务器
          "server_port”:port, //这个是shadow socks端口 到时候客户端需要用的
@@ -52,6 +53,20 @@ tags: shadowsocks
          "fast_open": false
      }
      
+     多账号配置
+     {
+         "server":"0.0.0.0", //这里不用绑定你的服务器
+         "local_address": "127.0.0.1",
+         "local_port":1080,
+         "port_password":{
+            "port1":"password1",
+            "port2":"password2",
+            "port3":"password3"
+         },
+         "timeout":300,
+         "method":"aes-256-cfb",
+         "fast_open": false
+     }
 * 修改“server_port”:12345 即可
 
 * 修改登录端口
