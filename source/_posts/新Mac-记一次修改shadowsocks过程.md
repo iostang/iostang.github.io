@@ -144,3 +144,17 @@ tags: shadowsocks
      玩的开心
      WTF GFW
 
+     
+### 2017-10-09 更新
+之前的东京服务器被封了 于是又购买了一个新加坡的 遇到个小坑 CentOS 7 需要开放防火墙 shadowsocks 服务端口，检查 VPS 供应商是设置的 iptables 还是 firewall，我的是 firewall，所以需要添加一条，然后重新加载一下就好了：
+        
+    firewall-cmd --permanent --add-port=8388/tcp //8388改成自己设置的端口号
+     firewall-cmd --reload
+
+将端口改成自己配置的端口，也就是上面的8388
+
+最后，启动ShadowSocks服务即可
+
+    ssserver -c /etc/shadowsocks.json -d restart
+
+
