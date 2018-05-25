@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-10-09T15:21:26.000Z</updated>
+  <updated>2018-05-25T07:01:37.366Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,11 +16,222 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>git-flow</title>
+    <link href="http://yoursite.com/2018/05/25/git-flow/"/>
+    <id>http://yoursite.com/2018/05/25/git-flow/</id>
+    <published>2018-05-25T07:01:12.000Z</published>
+    <updated>2018-05-25T07:01:37.366Z</updated>
+    
+    <content type="html"><![CDATA[<p>#git-flow 使用</p>
+<p>##安装 git-flow</p>
+<pre><code>brew install git-flow
+</code></pre><p><em>要了解安装 git-flow 细节，请阅读下面这个文档 <a href="https://github.com/petervanderdoes/gitflow/wiki#installing-git-flow" target="_blank" rel="external">official documentation</a>。</em></p>
+<p>##在项目中设置 git-flow</p>
+<pre><code>➜  GitFlow git:(master) git flow init
+
+Which branch should be used for bringing forth production releases?
+   - master
+Branch name for production releases: [master]
+Branch name for &quot;next release&quot; development: [develop]
+
+How to name your supporting branch prefixes?
+Feature branches? [feature/]
+Bugfix branches? [bugfix/]
+Release branches? [release/]
+Hotfix branches? [hotfix/]
+Support branches? [support/]
+Version tag prefix? []
+Hooks and filters directory? [/Users/tonytong/Desktop/GitFlow/.git/hooks
+</code></pre><p>##功能开发<br>对于一个开发人员来说，最平常的工作可能就是功能的开发。这就是为什么 git-flow 定义了很多对于功能开发的工作流程，从而来帮助你有组织地完成它。</p>
+<p><strong>Feature 开始开发一个新功能</strong></p>
+<pre><code>➜  GitFlow git:(develop) git flow feature start test-gitflow
+Switched to a new branch &apos;feature/test-gitflow&apos;
+
+Summary of actions:
+- A new branch &apos;feature/test-gitflow&apos; was created, based on &apos;develop&apos;
+- You are now on branch &apos;feature/test-gitflow&apos;
+
+Now, start committing on your feature. When done, use:
+
+     git flow feature finish test-gitflow
+
+
+上面的 git flow feature start test-gitflow 会基于develop创建一个新的分支test-gitflow 并自动切换到该分支
+</code></pre><p><strong>Feature 完成一个新功能</strong></p>
+<pre><code>➜  GitFlow git:(feature/test-gitflow) git flow feature finish test-gitflow
+Switched to branch &apos;develop&apos;
+Updating 862396e..e367e7c
+Fast-forward
+ GitFlow/ViewController.swift | 2 ++
+ 1 file changed, 2 insertions(+)
+Deleted branch feature/test-gitflow (was e367e7c).
+
+Summary of actions:
+- The feature branch &apos;feature/test-gitflow&apos; was merged into &apos;develop&apos;
+- Feature branch &apos;feature/test-gitflow&apos; has been locally deleted
+- You are now on branch &apos;develop&apos;
+</code></pre><p>执行feature finish之后会把我们的工作整合到主 “develop” 分支中去<br>而且还会删除这个当下已经完成的功能分支 并且自动切换到 “develop” 分支 </p>
+<p><strong>创建Release</strong></p>
+<pre><code>➜  GitFlow git:(develop) git flow release start 1.0.0
+Switched to a new branch &apos;release/1.0.0&apos;
+
+Summary of actions:
+- A new branch &apos;release/1.0.0&apos; was created, based on &apos;develop&apos;
+- You are now on branch &apos;release/1.0.0&apos;
+
+Follow-up actions:
+- Bump the version number now!
+- Start committing last-minute fixes in preparing your release
+- When done, run:
+
+     git flow release finish &apos;1.0.0&apos;
+</code></pre><p>请注意，release 分支是使用版本号命名的。这个命名方案还有一个很好的附带功能，那就是当我们完成了release 后，git-flow 会适当地<em>自动</em>去标记那些 release 提交。</p>
+<p>有了一个 release 分支，再完成针对 release 版本号的最后准备工作（如果项目里的某些文件需要记录版本号），并且进行最后的编辑。</p>
+<p><strong>完成Release</strong></p>
+<pre><code>➜  GitFlow git:(release/1.0.0) git flow release finish -m &quot;*release) finish&quot;
+Switched to branch &apos;master&apos;
+Merge made by the &apos;recursive&apos; strategy.
+ GitFlow/ViewController.swift | 1 +
+ 1 file changed, 1 insertion(+)
+Already on &apos;master&apos;
+Switched to branch &apos;develop&apos;
+Already up to date!
+Merge made by the &apos;recursive&apos; strategy.
+Deleted branch release/1.0.0 (was 93ae994).
+
+Summary of actions:
+- Release branch &apos;release/1.0.0&apos; has been merged into &apos;master&apos;
+- The release was tagged &apos;1.0.0&apos;
+- Release tag &apos;1.0.0&apos; has been back-merged into &apos;develop&apos;
+- Release branch &apos;release/1.0.0&apos; has been locally deleted
+- You are now on branch &apos;develop&apos;
+
+
+这个命令会完成如下一系列的操作：
+
+1 首先，git-flow 会拉取远程仓库，以确保目前是最新的版本。
+2 然后，release 的内容会被合并到 “master” 和 “develop” 两个分支中去，这样不仅产品代码为最新的版本，而且新的功能分支也将基于最新代码。
+3 为便于识别和做历史参考，release 提交会被标记上这个 release 的名字（在我们的例子里是 “1.0.0”）。
+4 清理操作，版本分支会被删除，并且回到 “develop”。
+
+从 Git 的角度来看，release 版本现在已经完成。依据你的设置，
+对 “master” 的提交可能已经触发了你所定义的部署流程，或者你可以通过手动部署，
+来让你的软件产品进入你的用户手中。
+</code></pre><p><strong>创建Hotfix</strong></p>
+<pre><code>➜  GitFlow git:(develop) git flow hotfix start crash-login
+Switched to a new branch &apos;hotfix/crash-login&apos;
+
+Summary of actions:
+- A new branch &apos;hotfix/crash-login&apos; was created, based on &apos;master&apos;
+- You are now on branch &apos;hotfix/crash-login&apos;
+
+Follow-up actions:
+- Start committing your hot fixes
+- Bump the version number now!
+- When done, run:
+
+     git flow hotfix finish &apos;crash-login&apos;
+</code></pre><p><strong>完成Hotfix</strong></p>
+<pre><code>➜  GitFlow git:(master) git flow hotfix finish crash-login -m &quot;*bugfix) finish&quot;
+Switched to branch &apos;develop&apos;
+Merge made by the &apos;recursive&apos; strategy.
+ GitFlow/ViewController.swift | 1 +
+ 1 file changed, 1 insertion(+)
+Deleted branch hotfix/crash-login (was 1330d0b).
+
+Summary of actions:
+- Hotfix branch &apos;hotfix/crash-login&apos; has been merged into &apos;master&apos;
+- The hotfix was tagged &apos;crash-login&apos;
+- Hotfix tag &apos;crash-login&apos; has been back-merged into &apos;develop&apos;
+- Hotfix branch &apos;hotfix/crash-login&apos; has been locally deleted
+- You are now on branch &apos;develop&apos;
+</code></pre><p>Git-Flow的hotfix分支和release分支有点像，区别在于release分支是由develop分支拉取出来的新分支，而hotfix分支是由master分支拉取出来的新分支，两者最终都会合并入master和develop分支。只不过hotfix用于生产环境中的紧急修复，需要快速响应和修复，减少Code ReView和QA环节的时间（不是说不做，只是说尽量快点完成这两个环节，尽量快点修复，否则大批用户都会受这个bug影响，毕竟是生产环境。）</p>
+<p>##提交commit规范</p>
+<pre><code>feat: 新增feature
+fix: 修复bug
+docs: 仅仅修改了文档，比如README, CHANGELOG, CONTRIBUTE等等
+style: 仅仅修改了空格、格式缩进、都好等等，不改变代码逻辑
+refactor: 代码重构，没有加新功能或者修复bug
+perf: 优化相关，比如提升性能、体验
+test: 测试用例，包括单元测试、集成测试等
+chore: 改变构建流程、或者增加依赖库、工具等
+revert: 回滚到上一个版本
+
+eg:
+    git commit -m &quot;feat： balabalabalaxxxxxxxxxx&quot;
+
+    git commit -am &quot;fix： balabalabalaxxxxxxxxxx&quot;
+
+    fix: Add TimeUnit null check test case in Timed #5231
+    * Add TimeUnit null check test case in Timed
+    * Correct ugly formatting in BasicIntQueueDisposable
+    * Reformatting line
+    * Add blockingIterable’s negative buffer size fail  test,close #5232
+    * Modify BlockingMultiObserver field’s modfier to private,fix #5231
+    * Revert style, modifier
+    * Remove duplicated test case.
+    * Remove no need annotation and variable
+</code></pre><p>##使用流程</p>
+<p>如果项目之前没有用过需要初始化一下</p>
+<pre><code>git flow init 
+</code></pre><p>有新的需求了 </p>
+<pre><code>git flow feature start order_delete
+</code></pre><p>推到远端 要不队友看不到（如果之前没有的话）</p>
+<pre><code>git push origin order_delete
+</code></pre><p>修改了xxx</p>
+<pre><code>git commit -m &quot;fix: 修复了xxxxx&quot;
+</code></pre><p>推到远端</p>
+<pre><code>git push origin order_delete
+</code></pre><p>过了几天 项目开发完成 测试也通过了</p>
+<pre><code>git flow feature finish order_delete
+</code></pre><p>这时候默认会自动删掉order_delete这个分支 并切换到develop</p>
+<p>测试通过 准备发包</p>
+<pre><code>git flow release start 2.2.5
+</code></pre><p>看看要不要修改版本号什么的。。。 没问题的话</p>
+<pre><code>git flow release finish 2.2.5
+</code></pre><hr>
+<p>上线了 发现这个版本有bug需要立即修复</p>
+<pre><code>git flow hotfix start crashBug
+
+git commit -m &quot;fix: xxxxxx&quot;
+
+git push origin crashBug
+</code></pre><p>再次提测 没问题了就</p>
+<pre><code>git flow hotfix finish crashBug
+</code></pre><p>测试通过 准备发包</p>
+<pre><code>git flow release start 2.2.5
+</code></pre><p>看看要不要修改版本号什么的。。。 没问题的话</p>
+<pre><code>git flow release finish 2.2.5
+</code></pre><p>##问题</p>
+<p><strong>feature是否应该细化到一个个小功能？feature与feature之间有耦合怎么处理？</strong></p>
+<p>这个问题可以看具体情况而定</p>
+<p>如果产品的需求耦合性不是很高 功能比较独立 这是建议分拆feature</p>
+<p>如果需求本身就是相互依赖 这时候分拆feature会适得其反</p>
+<p>##总结</p>
+<p>GitFlow有5大分支：<br>master（主干）<br>develop（开发）<br>feature（功能）<br>release（预发布）<br>hotfix（热修复）<br>这里说下release分支，其实正名应该叫发布分支，我为什么叫他预发布分支呢，因为这个release分支并不是真正的发布，他是由develop分支经过多次feature功能迭代后分出来的一个分支，告诉大家这些功能准备的差不多了，可以准备发布了，但是实际上并没有发布。release分支创建好后，应由QA做测试，研发一起联调，然后先发布到测试环境中进行测试，QA如果觉得有问题，可以先提交工单给研发，研发在这个release分支上做小幅度bug修复，如果QA觉得可以使用的时候再由研发完成发布功能，此时release分支上所做的更改会被合并入master和develop分支中,release分支会在合并后被删除</p>
+<p>##参考</p>
+<p><a href="https://www.jianshu.com/p/8a3988057d0f" target="_blank" rel="external">GitFlow with SourceTree</a></p>
+<p><a href="https://www.git-tower.com/learn/git/ebook/cn/command-line/advanced-topics/git-flow" target="_blank" rel="external">git-flow 的工作流程</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;#git-flow 使用&lt;/p&gt;
+&lt;p&gt;##安装 git-flow&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;brew install git-flow
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;em&gt;要了解安装 git-flow 细节，请阅读下面这个文档 &lt;a href=&quot;https://g
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
     <title>配置Jenkins for iOS 记录一些问题点</title>
     <link href="http://yoursite.com/2016/09/26/%E9%85%8D%E7%BD%AEJenkins-for-iOS-%E8%AE%B0%E5%BD%95%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98%E7%82%B9/"/>
     <id>http://yoursite.com/2016/09/26/配置Jenkins-for-iOS-记录一些问题点/</id>
     <published>2016-09-26T09:24:46.000Z</published>
-    <updated>2017-10-09T15:21:26.000Z</updated>
+    <updated>2018-05-25T07:00:12.907Z</updated>
     
     <content type="html"><![CDATA[<h2 id="1-源码管理"><a href="#1-源码管理" class="headerlink" title="1 源码管理"></a>1 源码管理</h2><ul>
 <li><p>Git源码管理问题    </p>
@@ -123,7 +334,7 @@
     <link href="http://yoursite.com/2016/08/26/Hexo-%E5%88%A9%E7%94%A8Github%E7%AE%A1%E7%90%86%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2/"/>
     <id>http://yoursite.com/2016/08/26/Hexo-利用Github管理你的博客/</id>
     <published>2016-08-26T10:49:55.000Z</published>
-    <updated>2017-10-09T15:21:26.000Z</updated>
+    <updated>2018-05-25T07:00:12.906Z</updated>
     
     <content type="html"><![CDATA[<h1 id="Hexo-利用Github管理博客"><a href="#Hexo-利用Github管理博客" class="headerlink" title="Hexo 利用Github管理博客"></a>Hexo 利用Github管理博客</h1><h3 id="1-搭建流程"><a href="#1-搭建流程" class="headerlink" title="1 搭建流程"></a>1 搭建流程</h3><blockquote>
 <p>配置环境<br>安装homebrew node.js git<br>申请Github<br>算了这些就不写了。。。</p>
@@ -210,7 +421,7 @@ git clone https://github.com/pinggod/hexo-theme-apollo.git themes/apollo
     <link href="http://yoursite.com/2016/08/25/%E6%96%B0Mac-%E8%AE%B0%E4%B8%80%E6%AC%A1%E4%BF%AE%E6%94%B9shadowsocks%E8%BF%87%E7%A8%8B/"/>
     <id>http://yoursite.com/2016/08/25/新Mac-记一次修改shadowsocks过程/</id>
     <published>2016-08-25T10:29:55.000Z</published>
-    <updated>2017-10-09T15:21:26.000Z</updated>
+    <updated>2018-05-25T07:00:12.907Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p> <strong>记住 确认是否已经登录服务器了 以下操作基本都是基于登录状态</strong> </p>
