@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-14T13:45:05.625Z</updated>
+  <updated>2019-08-14T13:54:19.162Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,15 +20,12 @@
     <link href="http://yoursite.com/2019/08/14/LKImageKit-%E7%AE%80%E8%BF%B0/"/>
     <id>http://yoursite.com/2019/08/14/LKImageKit-简述/</id>
     <published>2019-08-14T13:31:17.000Z</published>
-    <updated>2019-08-14T13:45:05.625Z</updated>
+    <updated>2019-08-14T13:54:19.162Z</updated>
     
-    <content type="html"><![CDATA[<p>#简介   </p>
-<p>LKImageKit是一个高性能的图片框架，包括了图片控件，图片下载、内存缓存、磁盘缓存、图片解码、图片处理等一系列能力。合理的架构和线程模型，并特别针对不同场景进行优化，能充分发挥硬件的性能。</p>
+    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>LKImageKit是一个高性能的图片框架，包括了图片控件，图片下载、内存缓存、磁盘缓存、图片解码、图片处理等一系列能力。合理的架构和线程模型，并特别针对不同场景进行优化，能充分发挥硬件的性能。</p>
 <p>同时，该框架具有高度的扩展性。在此框架下，开发者可以自定义图片框架中的任何一个部分，比如：自定义图片显示逻辑、自定义缓存、自定义下载组件、自定义解码器、自定义图片处理算法等等。</p>
-<p>#结构</p>
-<h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p><img src="https://pic1.zhimg.com/v2-905e0f2f0239e7dae1fd4e4374b6e0e1_r.jpg" alt="image"></p>
-<p>##目录结构</p>
-<pre><code>Core
+<h1 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h1><h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p><img src="http://iostang.github.io/images/LKImageKit_architecture.png" alt="image"></p>
+<h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><pre><code>Core
     Class
         LKImageView
         LKImageRequest
@@ -113,15 +110,12 @@ imageView.request = request;
 </code></pre><h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><pre><code>1 多线程（gcd信号量 线程锁 独立线程 并发控制 优先级）
 2 图片处理（模糊 灰度 预加载 解码 渐进式加载）
 3 链表 LRU MapTable
-</code></pre><p>#资料</p>
-<p><a href="https://www.jianshu.com/p/2bed0e361b86" target="_blank" rel="external">LRU、LFU、FIFO算法</a><br><a href="https://zhuanlan.zhihu.com/p/26955368" target="_blank" rel="external">@Swift开发者大会——如何打造易扩展的高性能图片组件</a><br><a href="https://www.jianshu.com/p/dcd222900fa9" target="_blank" rel="external">iOS中的NSHashTable和NSMapTable</a><br><a href="http://www.cnblogs.com/snailHL/p/3906112.html" target="_blank" rel="external">关于dispatch_semaphore的使用</a><br><a href="https://www.jianshu.com/p/f5eddfe074fe" target="_blank" rel="external">NSOperation和NSOperationQueue的一些事儿</a><br><a href="https://github.com/Tencent/LKImageKit/issues/5" target="_blank" rel="external">相对于SDWebImage的优势在哪里</a></p>
+</code></pre><h1 id="资料"><a href="#资料" class="headerlink" title="资料"></a>资料</h1><p><a href="https://www.jianshu.com/p/2bed0e361b86" target="_blank" rel="external">LRU、LFU、FIFO算法</a><br><a href="https://zhuanlan.zhihu.com/p/26955368" target="_blank" rel="external">@Swift开发者大会——如何打造易扩展的高性能图片组件</a><br><a href="https://www.jianshu.com/p/dcd222900fa9" target="_blank" rel="external">iOS中的NSHashTable和NSMapTable</a><br><a href="http://www.cnblogs.com/snailHL/p/3906112.html" target="_blank" rel="external">关于dispatch_semaphore的使用</a><br><a href="https://www.jianshu.com/p/f5eddfe074fe" target="_blank" rel="external">NSOperation和NSOperationQueue的一些事儿</a><br><a href="https://github.com/Tencent/LKImageKit/issues/5" target="_blank" rel="external">相对于SDWebImage的优势在哪里</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;#简介   &lt;/p&gt;
-&lt;p&gt;LKImageKit是一个高性能的图片框架，包括了图片控件，图片下载、内存缓存、磁盘缓存、图片解码、图片处理等一系列能力。合理的架构和线程模型，并特别针对不同场景进行优化，能充分发挥硬件的性能。&lt;/p&gt;
-&lt;p&gt;同时，该框架具有高度的扩展性。在此框
+      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;LKImageKit是一个高性能的图片框架，包括了图片控件，图片下载、内存缓存、磁盘缓存、图片解码、图片处理等一系列能力。合理的架构和线程模
     
     </summary>
     
