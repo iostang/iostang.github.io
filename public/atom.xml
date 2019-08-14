@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-14T13:38:30.907Z</updated>
+  <updated>2019-08-14T13:45:05.625Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/2019/08/14/LKImageKit-%E7%AE%80%E8%BF%B0/"/>
     <id>http://yoursite.com/2019/08/14/LKImageKit-简述/</id>
     <published>2019-08-14T13:31:17.000Z</published>
-    <updated>2019-08-14T13:38:30.907Z</updated>
+    <updated>2019-08-14T13:45:05.625Z</updated>
     
     <content type="html"><![CDATA[<p>#简介   </p>
 <p>LKImageKit是一个高性能的图片框架，包括了图片控件，图片下载、内存缓存、磁盘缓存、图片解码、图片处理等一系列能力。合理的架构和线程模型，并特别针对不同场景进行优化，能充分发挥硬件的性能。</p>
