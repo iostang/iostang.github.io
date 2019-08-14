@@ -16,7 +16,7 @@ LKImageKit是一个高性能的图片框架，包括了图片控件，图片下�
 
 ### 架构图
 
-![image](http://iostang.github.io/images/LKImageKit_architecture.png)
+![image](http://iostang.github.io/images/LKImageKit_architecture.jpg)
 
 ## 目录结构
    
